@@ -6,10 +6,10 @@
   },
   "dependencies": {
     "Microsoft.DotNet.ProjectModel": "1.0.0-*",
-    "NuGet.Versioning": "3.5.0-beta-1178",
-    "NuGet.Packaging": "3.5.0-beta-1178",
-    "NuGet.Frameworks": "3.5.0-beta-1178",
-    "NuGet.ProjectModel": "3.5.0-beta-1178"
+    "NuGet.Versioning": "3.5.0-beta-656",
+    "NuGet.Packaging": "3.5.0-beta-656",
+    "NuGet.Frameworks": "3.5.0-beta-656",
+    "NuGet.ProjectModel": "3.5.0-beta-656"
   },
   "frameworks": {
     "net451": {
