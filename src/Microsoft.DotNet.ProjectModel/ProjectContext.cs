@@ -164,11 +164,15 @@ namespace Microsoft.DotNet.ProjectModel
 
         public ProjectContext CreateRuntimeContext(IEnumerable<string> runtimeIdentifiers)
         {
+            /*
+
             // Temporary until we have removed RID inference from NuGet
             if(TargetFramework.IsCompileOnly)
             {
                 return this;
             }
+
+            */
 
             var context = CreateBuilder(ProjectFile.ProjectFilePath, TargetFramework)
                 .WithRuntimeIdentifiers(runtimeIdentifiers)
