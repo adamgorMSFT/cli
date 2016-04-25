@@ -11,6 +11,9 @@ namespace Microsoft.DotNet.TestFramework
 {
     public class TestInstance: TestDirectory
     {
+        // made tolower because the rest of the class works with normalized tolower strings 
+        private static readonly IEnumerable<string> BuildArtifactBlackList = new List<string>() {".IncrementalCache", ".SDKVersion"}.Select(s => s.ToLower()).ToArray(); 
+ 
         private string _testAssetRoot;
 
         internal TestInstance(string testAssetRoot, string testDestination) : base(testDestination)
@@ -91,9 +94,12 @@ namespace Microsoft.DotNet.TestFramework
             var binFiles = Directory.GetFiles(_testAssetRoot, "*.*", SearchOption.AllDirectories)
                                  .Where(file =>
                                  {
-                                     file = file.ToLower();
-                                     return file.Contains($"{System.IO.Path.DirectorySeparatorChar}bin{System.IO.Path.DirectorySeparatorChar}") 
-                                            || file.Contains($"{System.IO.Path.DirectorySeparatorChar}obj{System.IO.Path.DirectorySeparatorChar}");
+                                     var isArtifact = file.Contains($"{System.IO.Path.DirectorySeparatorChar}bin{System.IO.Path.DirectorySeparatorChar}")  
+                                            || file.Contains($"{System.IO.Path.DirectorySeparatorChar}obj{System.IO.Path.DirectorySeparatorChar}"); 
+ 
+                                     var isBlackListed = BuildArtifactBlackList.Any(b => file.Contains(b)); 
+ 
+                                     return isArtifact && !isBlackListed; 
                                  });
 
             foreach (string binFile in binFiles)
